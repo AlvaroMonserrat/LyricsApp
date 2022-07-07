@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">LyricsApp</string>
+    <string name="artist_by_id">Artist By ID</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search_artist_by_id">Search Artist By ID</string>
+    <string name="type_an_id_artist">Type an ID Artist</string>
+    <string name="search_artist_by_name">Search Artist by Name</string>
+    <string name="name_artist">Name Artist</string>
+</resources>
