@@ -1,16 +1,31 @@
 package com.rrat.lyricsapp.viewmodel
 
+import androidx.lifecycle.viewModelScope
 import com.rrat.lyricsapp.base.BaseViewModel
-import com.rrat.lyricsapp.model.data.ArtistData
-import com.rrat.lyricsapp.model.network.ArtistSong
-import com.rrat.lyricsapp.model.network.CallbackMockApi
-import com.rrat.lyricsapp.model.network.createMockApi
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.rrat.lyricsapp.model.network.CoroutinesMockApi
+import com.rrat.lyricsapp.model.network.createCoroutinesMockApi
+import kotlinx.coroutines.launch
 
-class HitsArtistViewModel(private val mockApi: CallbackMockApi = createMockApi()): BaseViewModel<UiState>() {
+class HitsArtistViewModel(private val mockApi: CoroutinesMockApi = createCoroutinesMockApi()): BaseViewModel<UiState>() {
 
+
+    fun performingSingleNetworkRequest(nameArtist: String)
+    {
+        uiState.value = UiState.Loading
+        viewModelScope.launch{
+            try {
+                val artistData = mockApi.getArtist(nameArtist)
+                uiState.value = UiState.Success(artistData)
+            }catch (exception: Exception)
+            {
+                uiState.value = UiState.Error("Network request failed!")
+            }
+
+        }
+
+    }
+
+    /*
     private var getHitsArtistCall: Call<ArtistData>? = null
 
     fun getHitsArtist(nameArtist: String)
@@ -35,10 +50,13 @@ class HitsArtistViewModel(private val mockApi: CallbackMockApi = createMockApi()
 
         })
     }
-
+        */
+    /*
     override fun onCleared() {
         super.onCleared()
         getHitsArtistCall?.cancel()
     }
+    */
+
 
 }

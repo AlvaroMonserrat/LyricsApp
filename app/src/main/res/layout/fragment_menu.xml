@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:padding="16dp"
-        android:text="@string/search_artist_by_id"
+        android:text="@string/search_list_song_by_id_artist"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -32,4 +32,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnFragmentSearchArtistByID" />
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnFragmentSearchSongByNameArtist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:padding="16dp"
+        android:text="@string/search_songs_by_name_artist"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnFragmentSearchArtistByName" />
 </androidx.constraintlayout.widget.ConstraintLayout>

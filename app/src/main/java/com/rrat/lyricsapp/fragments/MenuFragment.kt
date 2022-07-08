@@ -32,6 +32,7 @@ class MenuFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.btnFragmentSearchArtistByID.setOnClickListener { findNavController().navigate(R.id.action_menuFragment_to_artistFragment) }
         binding.btnFragmentSearchArtistByName.setOnClickListener { findNavController().navigate(R.id.action_menuFragment_to_hitsArtistFragment) }
+        binding.btnFragmentSearchSongByNameArtist.setOnClickListener { findNavController().navigate(R.id.action_menuFragment_to_songByArtistFragment) }
 
     }
 

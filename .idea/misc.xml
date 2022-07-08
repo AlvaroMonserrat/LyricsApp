@@ -8,6 +8,7 @@
         <entry key="..\:/LyricsApp/app/src/main/res/layout/fragment_artist.xml" value="0.152" />
         <entry key="..\:/LyricsApp/app/src/main/res/layout/fragment_hits_artist.xml" value="0.264" />
         <entry key="..\:/LyricsApp/app/src/main/res/layout/fragment_menu.xml" value="0.176" />
+        <entry key="..\:/LyricsApp/app/src/main/res/layout/fragment_song_by_artist.xml" value="0.25" />
       </map>
     </option>
   </component>

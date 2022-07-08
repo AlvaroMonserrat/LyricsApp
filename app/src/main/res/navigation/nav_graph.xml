@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_menuFragment_to_hitsArtistFragment"
             app:destination="@id/hitsArtistFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_songByArtistFragment"
+            app:destination="@id/songByArtistFragment" />
     </fragment>
     <fragment
         android:id="@+id/artistFragment"
@@ -33,6 +36,14 @@
         tools:layout="@layout/fragment_hits_artist" >
         <action
             android:id="@+id/action_hitsArtistFragment_to_menuFragment"
+            app:destination="@id/menuFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/songByArtistFragment"
+        android:name="com.rrat.lyricsapp.fragments.SongByArtistFragment"
+        android:label="SongByArtistFragment" >
+        <action
+            android:id="@+id/action_songByArtistFragment_to_menuFragment"
             app:destination="@id/menuFragment" />
     </fragment>
 </navigation>
