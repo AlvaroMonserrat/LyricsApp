@@ -1,4 +1,4 @@
-package com.rrat.lyricsapp.fragments
+package com.rrat.lyricsapp.view.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,22 +7,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.fragment.app.viewModels
-import com.rrat.lyricsapp.R
-import com.rrat.lyricsapp.databinding.FragmentArtistBinding
-import com.rrat.lyricsapp.databinding.FragmentMenuBinding
-import com.rrat.lyricsapp.model.network.ArtistSong
-import com.rrat.lyricsapp.viewmodel.ArtistViewModel
+import com.rrat.lyricsapp.databinding.FragmentHitsArtistBinding
+import com.rrat.lyricsapp.model.data.ArtistData
+import com.rrat.lyricsapp.viewmodel.HitsArtistViewModel
 import com.rrat.lyricsapp.viewmodel.UiState
 
 
-class ArtistFragment : Fragment() {
+class HitsArtistFragment : Fragment() {
 
-    private lateinit var binding: FragmentArtistBinding
-
-    private val viewModel: ArtistViewModel by viewModels()
+    private lateinit var binding: FragmentHitsArtistBinding
+    private val viewModel: HitsArtistViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
     }
 
     override fun onCreateView(
@@ -30,8 +28,7 @@ class ArtistFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentArtistBinding.inflate(inflater, container, false)
-
+        binding = FragmentHitsArtistBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -40,7 +37,7 @@ class ArtistFragment : Fragment() {
 
         viewModel.uiState().observe(viewLifecycleOwner)
         {
-            uiState->
+                uiState->
             if(uiState != null)
             {
                 render(uiState)
@@ -48,8 +45,9 @@ class ArtistFragment : Fragment() {
         }
 
         binding.btnSearchArtist.setOnClickListener {
-            val idArtist = binding.etArtistByID.text.toString()
-            viewModel.getSongByIdArtist(idArtist)
+            val nameArtist = binding.etArtistByID.text.toString()
+            //viewModel.getHitsArtist(nameArtist)
+            viewModel.performingSingleNetworkRequest(nameArtist)
         }
     }
 
@@ -63,7 +61,7 @@ class ArtistFragment : Fragment() {
             }
 
             is UiState.Success<*>->{
-                onSuccess(uiState as UiState.Success<ArtistSong>)
+                onSuccess(uiState as UiState.Success<ArtistData>)
             }
 
             is UiState.Error->{
@@ -77,14 +75,14 @@ class ArtistFragment : Fragment() {
         tvArtistInformation.text = "Loading"
     }
 
-    private fun onSuccess(uiState: UiState.Success<ArtistSong>) = with(binding)
+    private fun onSuccess(uiState: UiState.Success<ArtistData>) = with(binding)
     {
-        tvArtistInformation.text =  uiState.obj.response.songs[0].artist_names
+        tvArtistInformation.text =  binding.etArtistByID.text.toString() + uiState.obj.response.hits.first().result.primary_artist.id
 
         val songList = ArrayList<String>()
-        for(song in uiState.obj.response.songs)
+        for(hits in uiState.obj.response.hits)
         {
-            songList.add(song.title)
+            songList.add(hits.result.full_title)
         }
         val adapter = ArrayAdapter(context!!, android.R.layout.simple_list_item_1, songList)
         lvListView.adapter = adapter
@@ -95,5 +93,4 @@ class ArtistFragment : Fragment() {
     {
         tvArtistInformation.text = uiState.message
     }
-
 }

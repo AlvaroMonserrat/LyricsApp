@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="16dp"
-    tools:context=".fragments.ArtistFragment">
+    tools:context=".view.fragments.ArtistFragment">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/materialCardView"
@@ -65,8 +65,8 @@
 
     </com.google.android.material.card.MaterialCardView>
 
-    <ListView
-        android:id="@+id/lvListView"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvListView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"

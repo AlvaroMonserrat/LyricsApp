@@ -8,6 +8,7 @@ fun main()
     runBlocking {
         val job = launch(start = CoroutineStart.LAZY) {
             println(networkRequest())
+            println(networkRequest())
         }
         println("Out coroutines")
         delay(1000)
@@ -17,7 +18,7 @@ fun main()
 }
 
 suspend fun networkRequest(): String{
-    delay(500)
+    delay(2000)
     println("networkRequest  ${Thread.currentThread().name}")
     return "Result"
 }

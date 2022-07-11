@@ -1,4 +1,4 @@
-package com.rrat.lyricsapp.fragments
+package com.rrat.lyricsapp.view.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,26 +6,27 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.rrat.lyricsapp.R
-import com.rrat.lyricsapp.databinding.FragmentHitsArtistBinding
-import com.rrat.lyricsapp.databinding.FragmentSongByArtistBinding
-import com.rrat.lyricsapp.model.data.ArtistData
+import com.rrat.lyricsapp.databinding.FragmentArtistBinding
 import com.rrat.lyricsapp.model.network.ArtistSong
-import com.rrat.lyricsapp.viewmodel.HitsArtistViewModel
-import com.rrat.lyricsapp.viewmodel.SongByArtistViewModel
+import com.rrat.lyricsapp.view.adapters.ArtistAdapter
+import com.rrat.lyricsapp.viewmodel.ArtistViewModel
 import com.rrat.lyricsapp.viewmodel.UiState
 
 
-class SongByArtistFragment : Fragment() {
+class ArtistFragment : Fragment() {
 
+    private lateinit var binding: FragmentArtistBinding
 
-    private lateinit var binding: FragmentSongByArtistBinding
-    private val viewModel: SongByArtistViewModel by viewModels()
+    private val viewModel: ArtistViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     override fun onCreateView(
@@ -33,16 +34,19 @@ class SongByArtistFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentSongByArtistBinding.inflate(inflater, container, false)
+        binding = FragmentArtistBinding.inflate(inflater, container, false)
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setupRecyclerView()
+
         viewModel.uiState().observe(viewLifecycleOwner)
         {
-                uiState->
+            uiState->
             if(uiState != null)
             {
                 render(uiState)
@@ -50,9 +54,8 @@ class SongByArtistFragment : Fragment() {
         }
 
         binding.btnSearchArtist.setOnClickListener {
-            val nameArtist = binding.etArtistByID.text.toString()
-            //viewModel.getHitsArtist(nameArtist)
-            viewModel.performingDoubleNetworkRequest(nameArtist)
+            val idArtist = binding.etArtistByID.text.toString()
+            viewModel.getSongByIdArtist(idArtist)
         }
     }
 
@@ -82,15 +85,9 @@ class SongByArtistFragment : Fragment() {
 
     private fun onSuccess(uiState: UiState.Success<ArtistSong>) = with(binding)
     {
-        tvArtistInformation.text =  binding.etArtistByID.text.toString()
-
-        val songList = ArrayList<String>()
-        for(song in uiState.obj.response.songs)
-        {
-            songList.add(song.title)
-        }
-        val adapter = ArrayAdapter(context!!, android.R.layout.simple_list_item_1, songList)
-        lvListView.adapter = adapter
+        tvArtistInformation.text =  uiState.obj.response.next_page.toString()
+        val adapter = ArtistAdapter(uiState.obj.response.songs)
+        rvListView.adapter = adapter
 
     }
 
@@ -98,4 +95,11 @@ class SongByArtistFragment : Fragment() {
     {
         tvArtistInformation.text = uiState.message
     }
+
+    private fun setupRecyclerView()
+    {
+        binding.rvListView.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+
+    }
+
 }

@@ -1,4 +1,4 @@
-package com.rrat.lyricsapp.fragments
+package com.rrat.lyricsapp.view.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.rrat.lyricsapp.R
-import com.rrat.lyricsapp.databinding.ActivityMainBinding
 import com.rrat.lyricsapp.databinding.FragmentMenuBinding
 
 class MenuFragment : Fragment() {
