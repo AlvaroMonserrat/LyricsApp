@@ -8,6 +8,7 @@
     android:padding="16dp"
     tools:context=".view.fragments.ArtistFragment">
 
+
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/materialCardView"
         android:layout_width="match_parent"
