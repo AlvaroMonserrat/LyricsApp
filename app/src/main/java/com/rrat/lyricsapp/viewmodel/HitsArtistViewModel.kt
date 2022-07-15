@@ -72,8 +72,4 @@ class HitsArtistViewModel(private val mockApi: CoroutinesMockApi = createCorouti
     }
     */
 
-    override fun onCleared() {
-        super.onCleared()
-        Log.i("VIEWMODEL", "CLEAR")
-    }
 }
