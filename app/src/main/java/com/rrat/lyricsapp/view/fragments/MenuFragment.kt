@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.rrat.lyricsapp.R
 import com.rrat.lyricsapp.databinding.FragmentMenuBinding
+import com.rrat.mymathlibrary.SpecialMath
 
 class MenuFragment : Fragment() {
 
@@ -29,6 +30,9 @@ class MenuFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.tvDate.text = SpecialMath().areRect(2,5).toString()
+
         binding.btnFragmentSearchArtistByID.setOnClickListener { findNavController().navigate(R.id.action_menuFragment_to_artistFragment) }
         binding.btnFragmentSearchArtistByName.setOnClickListener { findNavController().navigate(R.id.action_menuFragment_to_hitsArtistFragment) }
         binding.btnFragmentSearchSongByNameArtist.setOnClickListener { findNavController().navigate(R.id.action_menuFragment_to_songByArtistFragment) }
