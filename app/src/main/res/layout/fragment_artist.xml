@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="16dp"
     tools:context=".view.fragments.ArtistFragment">
 
 
@@ -14,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="16dp"
-        app:cardElevation="8dp"
+        app:cardElevation="4dp"
         app:cardPreventCornerOverlap="true"
         app:cardUseCompatPadding="true"
         app:layout_constraintEnd_toEndOf="parent"
@@ -27,11 +26,12 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etArtistByID"
-                android:layout_width="200dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="16dp"
                 android:hint="@string/type_an_id_artist"
+                app:layout_constraintEnd_toStartOf="@id/btnSearchArtist"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -70,6 +70,7 @@
         android:id="@+id/rvListView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_margin="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

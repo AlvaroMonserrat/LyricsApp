@@ -6,6 +6,20 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        release {
+            storeFile file('D:\\Android KeyStores\\GeneralStore\\general_store.jks')
+            storePassword 'beta2022'
+            keyAlias 'beta0'
+            keyPassword 'beta2022'
+        }
+        'paid-release' {
+            storeFile file('D:\\Android KeyStores\\GeneralStore\\general_store.jks')
+            storePassword 'beta2022'
+            keyPassword 'beta2022'
+            keyAlias 'beta0'
+        }
+    }
     compileSdk 32
 
     defaultConfig {
@@ -16,6 +30,31 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        resourceConfigurations += []
+        signingConfig signingConfigs.release
+    }
+
+    flavorDimensions "paidMode"
+    productFlavors{
+        free{
+            dimension "paidMode"
+            applicationId = "com.rrat.lyricsapp.free"
+            versionName "$defaultConfig.versionName" + ".free"
+            applicationIdSuffix ".free"
+            //resValue "string", "app_name", "App-Free"
+            manifestPlaceholders=[
+                    appIcon: "@mipmap/ic_launcher",
+            ]
+        }
+        paid{
+            dimension "paidMode"
+            applicationId = "com.rrat.lyricsapp.paid"
+            applicationIdSuffix ".paid"
+            manifestPlaceholders=[
+                    appIcon: "@mipmap/ic_lyrics",
+            ]
+            signingConfig signingConfigs.release
+        }
     }
 
     buildTypes {
@@ -86,6 +125,6 @@ dependencies {
 
     implementation 'com.jakewharton.timber:timber:5.0.1'
 
-    implementation project(':mymathlibrary')
+    implementation 'com.github.AlvaroMonserrat:LyricsApp:1.0'
 
 }
