@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import androidx.compose.material.MaterialTheme
 import androidx.fragment.app.viewModels
+import com.rrat.lyricsapp.compose.hitsartist.HitsArtistCard
 import com.rrat.lyricsapp.databinding.FragmentHitsArtistBinding
 import com.rrat.lyricsapp.model.data.ArtistData
 import com.rrat.lyricsapp.viewmodel.HitsArtistViewModel
@@ -29,6 +31,14 @@ class HitsArtistFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentHitsArtistBinding.inflate(inflater, container, false)
+
+        binding.composeView.setContent {
+            MaterialTheme {
+                HitsArtistCard()
+            }
+        }
+
+
         return binding.root
     }
 
@@ -44,11 +54,11 @@ class HitsArtistFragment : Fragment() {
             }
         }
 
-        binding.btnSearchArtist.setOnClickListener {
+        /*binding.btnSearchArtist.setOnClickListener {
             val nameArtist = binding.etArtistByID.text.toString()
             //viewModel.getHitsArtist(nameArtist)
             viewModel.performingSingleNetworkRequest(nameArtist)
-        }
+        }*/
     }
 
     @Suppress("UNCHECKED_CAST")
@@ -72,12 +82,12 @@ class HitsArtistFragment : Fragment() {
     }
 
     private fun onLoad() = with(binding){
-        tvArtistInformation.text = "Loading"
+        //tvArtistInformation.text = "Loading"
     }
 
     private fun onSuccess(uiState: UiState.Success<ArtistData>) = with(binding)
     {
-        tvArtistInformation.text =  binding.etArtistByID.text.toString() + uiState.obj.response.hits.first().result.primary_artist.id
+       // tvArtistInformation.text =  binding.etArtistByID.text.toString() + uiState.obj.response.hits.first().result.primary_artist.id
 
         val songList = ArrayList<String>()
         for(hits in uiState.obj.response.hits)
@@ -91,6 +101,6 @@ class HitsArtistFragment : Fragment() {
 
     private fun onError(uiState: UiState.Error) = with(binding)
     {
-        tvArtistInformation.text = uiState.message
+       // tvArtistInformation.text = uiState.message
     }
 }

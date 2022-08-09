@@ -7,7 +7,15 @@
     android:layout_height="match_parent"
     tools:context=".view.fragments.HitsArtistFragment">
 
-    <com.google.android.material.card.MaterialCardView
+    <androidx.compose.ui.platform.ComposeView
+        android:id="@+id/compose_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+  <!--  <com.google.android.material.card.MaterialCardView
         android:id="@+id/materialCardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -19,8 +27,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         >
+        -->
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+       <!-- <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -62,9 +71,9 @@
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+-->
 
-
-    </com.google.android.material.card.MaterialCardView>
+<!--    </com.google.android.material.card.MaterialCardView>-->
 
     <ListView
         android:id="@+id/lvListView"
@@ -74,6 +83,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/materialCardView" />
+        app:layout_constraintTop_toBottomOf="@+id/compose_view" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
